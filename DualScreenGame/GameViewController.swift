@@ -29,9 +29,9 @@ class GameViewController: UIViewController {
         scene.scaleMode = .resizeFill
         skView.presentScene(scene)
         
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        skView.showsPhysics = true
+//        skView.showsFPS = true
+//        skView.showsNodeCount = true
+        //skView.showsPhysics = true
         
         musicControl.loadSoundEffects()
         
