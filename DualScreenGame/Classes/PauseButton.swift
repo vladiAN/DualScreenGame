@@ -9,13 +9,13 @@ import Foundation
 import SpriteKit
 
 class PauseButton: SKSpriteNode {
-    let startNode: SKNode
+    let startNode: StartNode
     
     init(startNode: SKNode) {
-        self.startNode = startNode
+        self.startNode = startNode as! StartNode
         
         let texture = SKTexture(imageNamed: "pauseButton")
-        super.init(texture: texture, color: .clear, size: CGSize(width: 50, height: 50))
+        super.init(texture: texture, color: .clear, size: CGSize(width: 35, height: 35))
         self.zPosition = 20
         self.isUserInteractionEnabled = true
     }
@@ -25,11 +25,16 @@ class PauseButton: SKSpriteNode {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
           guard let touch = touches.first else { return }
           let location = touch.location(in: self.parent!)
 
           if self.contains(location) {
+              MusicManager.shared.soundEffects(fileName: "click")
               startNode.isHidden = !startNode.isHidden
+              startNode.playButton.isHidden = false
+              self.scene?.isPaused = true
           }
+        
       }
 }

@@ -11,6 +11,8 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
+    let musicControl = MusicManager.shared
+    
     let scene = GameScene()
 
     override func viewDidLoad() {
@@ -30,6 +32,8 @@ class GameViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.showsPhysics = true
+        
+        musicControl.loadSoundEffects()
         
     }
     
