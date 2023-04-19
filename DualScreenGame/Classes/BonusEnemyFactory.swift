@@ -17,7 +17,7 @@ class BonusEnemyFactory: SKSpriteNode {
         self.position = CGPoint(x: positionX, y: sceneSize.height / 2 + self.frame.height)
         self.zPosition = 2
         
-        let delayMove = SKAction.wait(forDuration: TimeInterval(Double.random(in: 0...3)))
+        let delayMove = SKAction.wait(forDuration: 1)
         let moveElement = SKAction.moveBy(x: 0, y: -sceneSize.height - self.frame.height * 2, duration: TimeInterval(speedElement))
         let removeAction = SKAction.removeFromParent()
         let elementMoveBg = SKAction.repeatForever(SKAction.sequence([delayMove, moveElement, removeAction]))

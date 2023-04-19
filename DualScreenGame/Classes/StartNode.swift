@@ -41,8 +41,8 @@ class StartNode: SKNode {
 
         addChild(startNode)
         
-        let buttonNames = ["1x", "2x", "3x", "4x"]
-        let buttonColor = [#colorLiteral(red: 0.2086621225, green: 0.4848608971, blue: 0.6918790936, alpha: 1), #colorLiteral(red: 0.4912056923, green: 0.635033071, blue: 0.1864731908, alpha: 1), #colorLiteral(red: 0.7202162743, green: 0.4364849031, blue: 0.1123431996, alpha: 1), #colorLiteral(red: 0.6781327724, green: 0.2083256841, blue: 0.2036624551, alpha: 1)]
+        let buttonNames = ["2x", "3x", "4x"]
+        let buttonColor = [#colorLiteral(red: 0.2086621225, green: 0.4848608971, blue: 0.6918790936, alpha: 1), #colorLiteral(red: 0.4912056923, green: 0.635033071, blue: 0.1864731908, alpha: 1), #colorLiteral(red: 0.7202162743, green: 0.4364849031, blue: 0.1123431996, alpha: 1)]
         let buttonSpacing: CGFloat = 15
         let totalButtonHeight = CGFloat(buttonNames.count) * (50 + buttonSpacing) - buttonSpacing
         var currentY: CGFloat = totalButtonHeight/2 - 50/2
@@ -97,8 +97,6 @@ class StartNode: SKNode {
             let nodes = self.nodes(at: location)
             for node in nodes {
                 switch node.name {
-                case "1x":
-                    selectButton(level: 1)
                 case "2x":
                     selectButton(level: 2)
                 case "3x":

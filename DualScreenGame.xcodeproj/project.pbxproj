@@ -10,6 +10,7 @@
 		C0056B7F29DC5E58003CBE3F /* StartNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0056B7E29DC5E58003CBE3F /* StartNode.swift */; };
 		C0056B8129DC69D9003CBE3F /* GameNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0056B8029DC69D9003CBE3F /* GameNode.swift */; };
 		C0056B8329DDA770003CBE3F /* PauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0056B8229DDA770003CBE3F /* PauseButton.swift */; };
+		C027F54C29F01646005D5016 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = C027F54B29F01646005D5016 /* MyParticle.sks */; };
 		C0894EDA29E515FF002E2B34 /* BonusEnemyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0894ED929E515FF002E2B34 /* BonusEnemyFactory.swift */; };
 		C0894EDC29E5A276002E2B34 /* GameOverNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0894EDB29E5A276002E2B34 /* GameOverNode.swift */; };
 		C0894EDE29E6EC66002E2B34 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0894EDD29E6EC66002E2B34 /* MusicManager.swift */; };
@@ -33,6 +34,7 @@
 		C0056B7E29DC5E58003CBE3F /* StartNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartNode.swift; sourceTree = "<group>"; };
 		C0056B8029DC69D9003CBE3F /* GameNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNode.swift; sourceTree = "<group>"; };
 		C0056B8229DDA770003CBE3F /* PauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButton.swift; sourceTree = "<group>"; };
+		C027F54B29F01646005D5016 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		C0894ED929E515FF002E2B34 /* BonusEnemyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusEnemyFactory.swift; sourceTree = "<group>"; };
 		C0894EDB29E5A276002E2B34 /* GameOverNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverNode.swift; sourceTree = "<group>"; };
 		C0894EDD29E6EC66002E2B34 /* MusicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				C0CCFCAA29D44DCF00F91ED1 /* AppDelegate.swift */,
 				C0CCFCB229D44DCF00F91ED1 /* GameViewController.swift */,
 				C0CCFCB029D44DCF00F91ED1 /* GameScene.swift */,
+				C027F54B29F01646005D5016 /* MyParticle.sks */,
 				C0056B8429DDA775003CBE3F /* Classes */,
 				C0894EF029E6F2B1002E2B34 /* Managers */,
 				C0894EED29E6F186002E2B34 /* SoundsEffects */,
@@ -195,6 +198,7 @@
 				C0894EE929E6F172002E2B34 /* click.mp3 in Resources */,
 				C0894EE829E6F172002E2B34 /* tap.mp3 in Resources */,
 				C0894EE729E6F172002E2B34 /* die.mp3 in Resources */,
+				C027F54C29F01646005D5016 /* MyParticle.sks in Resources */,
 				C0894EE629E6F172002E2B34 /* music.mp3 in Resources */,
 				C0CCFCB629D44DCF00F91ED1 /* Main.storyboard in Resources */,
 				C0CCFCB829D44DD100F91ED1 /* Assets.xcassets in Resources */,

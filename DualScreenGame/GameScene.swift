@@ -10,7 +10,6 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    var gameLevel: Int!
     var startNode: SKNode!
     var pauseButton: PauseButton!
     var gameNodeArray: [SKNode] = []
@@ -60,7 +59,7 @@ class GameScene: SKScene {
         startNode.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(startNode)
     }
-
+    
     func setGameOverNode() {
         
         let gameOverNode = GameOverNode(size: self.size,
@@ -79,7 +78,7 @@ class GameScene: SKScene {
         gameOverNode.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(gameOverNode)
     }
-
+    
     
     func setPauseButton() {
         pauseButton = PauseButton(startNode: startNode)
@@ -142,7 +141,7 @@ class GameScene: SKScene {
         }
         
     }
-
+    
 }
 
 extension GameScene: SKPhysicsContactDelegate {
@@ -150,41 +149,73 @@ extension GameScene: SKPhysicsContactDelegate {
         
         let newSpeed = scene!.speed + (0.2   / Double(level))
         var enotherBody: SKPhysicsBody
+        var hero: SKPhysicsBody
         
         if contact.bodyA.categoryBitMask == BitMasks.hero {
             enotherBody = contact.bodyB
+            hero = contact.bodyA
         } else {
             enotherBody = contact.bodyA
+            hero = contact.bodyB
         }
         
-     
+        func catchCoinEffects(position: CGPoint, node: SKNode) {
+            let effect = SKEmitterNode(fileNamed: "MyParticle.sks")!
+            let removeEffect = SKAction.sequence([
+                .wait(forDuration: 3),
+                .removeFromParent()
+            ])
+            effect.position = position
+            effect.zPosition = 100
+            effect.run(removeEffect)
+            node.addChild(effect)
+        }
+        
+        func coinContactSet() {
+            if let parentNode = enotherBody.node?.parent {
+                catchCoinEffects(position: enotherBody.node!.position, node: parentNode)
+            }
+            if let coin = enotherBody.node as? SKSpriteNode {
+                coin.removeFromParent()
+            }
+            scene?.speed = newSpeed
+        }
+        
+        func deathHero() {
+            let pulsedRed = SKAction.sequence([
+                SKAction.colorize(with: .red, colorBlendFactor: 1.0, duration: 0.5),
+                SKAction.wait(forDuration: 0.1),
+                SKAction.colorize(withColorBlendFactor: 0.0, duration: 0.15)
+            ])
+            enotherBody.node?.isPaused = true
+            hero.node?.run(pulsedRed)
+            musicSoundEffects.soundEffects(fileName: "die")
+            musicSoundEffects.soundEffects(fileName: "gameOver")
+            musicSoundEffects.stopBackgroundMusic()
+            
+            let sqnsDealyGameOver = SKAction.sequence([
+                .wait(forDuration: 1.5),
+                .run  { [self] in
+                    setGameOverNode()
+                    scene?.isPaused = true
+                }
+            ])
+            self.run(sqnsDealyGameOver)
+        }
+        
         switch enotherBody.categoryBitMask {
         case BitMasks.bonusCoinGold:
             musicSoundEffects.soundEffects(fileName: "coin2")
             score += 50
-            scene?.speed = newSpeed
-            if let coin = enotherBody.node as? SKSpriteNode {
-                coin.removeFromParent()
-            }
+            coinContactSet()
         case BitMasks.bonusCoin:
             musicSoundEffects.soundEffects(fileName: "coin1")
             score += 25
-            scene?.speed = newSpeed
-            if let coin = enotherBody.node as? SKSpriteNode {
-                coin.removeFromParent()
-            }
+            coinContactSet()
         case BitMasks.enemyBox:
-            musicSoundEffects.soundEffects(fileName: "die")
-            musicSoundEffects.soundEffects(fileName: "gameOver")
-            musicSoundEffects.stopBackgroundMusic()
-            setGameOverNode()
-            scene?.isPaused = true
+            deathHero()
         case BitMasks.enemyStone:
-            musicSoundEffects.soundEffects(fileName: "die")
-            musicSoundEffects.soundEffects(fileName: "gameOver")
-            musicSoundEffects.stopBackgroundMusic()
-            setGameOverNode()
-            scene?.isPaused = true
+            deathHero()
         default:
             print("contact unkmow")
         }

@@ -68,7 +68,6 @@ class GameNode: SKSpriteNode {
         hero = SKSpriteNode(imageNamed: nameImage)
         hero.size = sizeElement
         hero.position = CGPoint(x: positionX, y: -size.height / 2 + hero.frame.height + 10)
-//        hero.zPosition = 2
         hero.physicsBody = SKPhysicsBody(circleOfRadius: sizeElement.width / 2)
         hero.physicsBody?.isDynamic = true
         hero.physicsBody?.affectedByGravity = false
@@ -76,6 +75,13 @@ class GameNode: SKSpriteNode {
         hero.physicsBody?.contactTestBitMask = BitMasks.bonusCoin | BitMasks.bonusCoinGold | BitMasks.enemyStone | BitMasks.enemyBox
         hero.physicsBody?.collisionBitMask = 0
         addChild(hero)
+        
+        let scaleUpAction = SKAction.scale(to: 1.15, duration: 1)
+        let scaleDownAction = SKAction.scale(to: 0.85, duration: 1)
+        let scaleSequence = SKAction.sequence([scaleUpAction, scaleDownAction])
+        let scaleForeverAction = SKAction.repeatForever(scaleSequence)
+        hero.run(scaleForeverAction)
+        
     }
     
     func setPhysicsBody(body: SKSpriteNode, categoryBitMask: UInt32) {
@@ -121,7 +127,6 @@ class GameNode: SKSpriteNode {
     
     func createElements() {
         
-        let delayCreate = SKAction.wait(forDuration: TimeInterval(Double.random(in: 0...2)))
         let createElement = SKAction.run {
             let random = Int.random(in: 0...3)
             switch random {
@@ -132,9 +137,8 @@ class GameNode: SKSpriteNode {
             default: return
             }
         }
-        let delay = SKAction.wait(forDuration: TimeInterval(speedElement - Double.random(in: 0...speedElement/2)))
+        let delay = SKAction.wait(forDuration: 4)
         let sequence = SKAction.sequence([
-            delayCreate,
             createElement,
             delay
         ])
@@ -145,7 +149,9 @@ class GameNode: SKSpriteNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         musicSoundEffects.soundEffects(fileName: "tap")
         leftPositionX.toggle()
-        hero.position.x = CGFloat(leftPositionX ? -30 : 30)
+        let newPositionX = CGFloat(leftPositionX ? -30 : 30)
+        let moveAction = SKAction.move(to: CGPoint(x: newPositionX, y: hero.position.y), duration: 0.5)
+        hero.run(moveAction)
     }
     
 }
