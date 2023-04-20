@@ -150,7 +150,7 @@ class GameNode: SKSpriteNode {
         musicSoundEffects.soundEffects(fileName: "tap")
         leftPositionX.toggle()
         let newPositionX = CGFloat(leftPositionX ? -30 : 30)
-        let moveAction = SKAction.move(to: CGPoint(x: newPositionX, y: hero.position.y), duration: 0.5)
+        let moveAction = SKAction.move(to: CGPoint(x: newPositionX, y: hero.position.y), duration: 0.3)
         hero.run(moveAction)
     }
     

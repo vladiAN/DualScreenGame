@@ -61,7 +61,10 @@ class GameScene: SKScene {
     }
     
     func setGameOverNode() {
-        
+        self.removeAllActions()
+        self.children.forEach { node in
+            node.removeAllActions()
+        }
         let gameOverNode = GameOverNode(size: self.size,
                                         startNode: startNode,
                                         score: score,
@@ -193,11 +196,29 @@ extension GameScene: SKPhysicsContactDelegate {
             musicSoundEffects.soundEffects(fileName: "gameOver")
             musicSoundEffects.stopBackgroundMusic()
             
+            func pauseNode(node: SKNode) {
+                if enotherBody.node?.parent == node {
+                    let nodeFailStop = SKAction.sequence([
+                        .wait(forDuration: 1),
+                        .run {
+                            node.isPaused = true
+                        }
+                    ])
+                    node.run(nodeFailStop)
+                } else {
+                    node.isPaused = true
+                }
+            }
+            
             let sqnsDealyGameOver = SKAction.sequence([
-                .wait(forDuration: 1.5),
-                .run  { [self] in
-                    setGameOverNode()
-                    scene?.isPaused = true
+                .run {
+                    self.gameNodeArray.forEach { node in
+                        pauseNode(node: node)
+                    }
+                },
+                .wait(forDuration: 2),
+                .run  {
+                    self.setGameOverNode()
                 }
             ])
             self.run(sqnsDealyGameOver)
@@ -214,8 +235,10 @@ extension GameScene: SKPhysicsContactDelegate {
             coinContactSet()
         case BitMasks.enemyBox:
             deathHero()
+            hero.node?.physicsBody?.isDynamic = false
         case BitMasks.enemyStone:
             deathHero()
+            hero.node?.physicsBody?.isDynamic = false
         default:
             print("contact unkmow")
         }

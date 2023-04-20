@@ -19,7 +19,12 @@ class GameOverNode: SKNode {
         self.setSceneCallBack = setSceneCallBack
         super.init()
         self.zPosition = 100
+        self.alpha = 0
         self.isUserInteractionEnabled = true
+        
+        let fadeInAction = SKAction.fadeIn(withDuration: 1.5)
+        self.run(fadeInAction)
+        
         setNode(size: size, score: score, level: level)
     }
     
