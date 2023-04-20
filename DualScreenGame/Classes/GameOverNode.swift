@@ -22,8 +22,10 @@ class GameOverNode: SKNode {
         self.alpha = 0
         self.isUserInteractionEnabled = true
         
-        let fadeInAction = SKAction.fadeIn(withDuration: 1.5)
-        self.run(fadeInAction)
+        self.run(.sequence([
+            .wait(forDuration: 2),
+            .fadeIn(withDuration: 1.5)
+        ]))
         
         setNode(size: size, score: score, level: level)
     }

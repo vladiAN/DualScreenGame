@@ -13,7 +13,7 @@ struct BitMasks {
     static let bonusCoinGold: UInt32 = 2
     static let bonusCoin: UInt32 = 4
     static let enemyBox: UInt32 = 8
-    static let enemyStone: UInt32 = 16
+//    static let enemyStone: UInt32 = 16
 }
 
 class GameNode: SKSpriteNode {
@@ -72,7 +72,7 @@ class GameNode: SKSpriteNode {
         hero.physicsBody?.isDynamic = true
         hero.physicsBody?.affectedByGravity = false
         hero.physicsBody?.categoryBitMask = BitMasks.hero
-        hero.physicsBody?.contactTestBitMask = BitMasks.bonusCoin | BitMasks.bonusCoinGold | BitMasks.enemyStone | BitMasks.enemyBox
+        hero.physicsBody?.contactTestBitMask = BitMasks.bonusCoin | BitMasks.bonusCoinGold | BitMasks.enemyBox
         hero.physicsBody?.collisionBitMask = 0
         addChild(hero)
         
@@ -122,7 +122,7 @@ class GameNode: SKSpriteNode {
                                        sizeElement: sizeElement,
                                        imageName: "enemyStone",
                                        speedElement: speedElement)
-        setPhysicsBody(body: enemyStone, categoryBitMask: BitMasks.enemyStone)
+        setPhysicsBody(body: enemyStone, categoryBitMask: BitMasks.enemyBox)
     }
     
     func createElements() {
